@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team - WCWS</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <style>
+    .team-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar include -->
+  <div ng-include="'../includes/navbar.html'"></div>
+
+  <!-- Team Section -->
+  <section class="container py-5 text-center">
+    <h2 class="mb-4">Our Dedicated Team</h2>
+    <div class="row g-4">
+      <div class="col-md-3 team-card">
+        <div class="card shadow-sm">
+          <img src="../pictures/bibha_pandey.jpg" class="mx-auto mt-3">
+          <div class="card-body">
+            <h5>Mrs. Bibha Pandey</h5>
+            <p>Founder & President</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 team-card">
+        <div class="card shadow-sm">
+          <img src="../pictures/upendra_mishra.jpg" class="mx-auto mt-3">
+          <div class="card-body">
+            <h5>Mr. Upendra Mishra</h5>
+            <p>Program Coordinator</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 team-card">
+        <div class="card shadow-sm">
+          <img src="https://source.unsplash.com/120x120/?man,volunteer" class="mx-auto mt-3">
+          <div class="card-body">
+            <h5>Mr. Arjun Lama</h5>
+            <p>Project Manager</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 team-card">
+        <div class="card shadow-sm">
+          <img src="https://source.unsplash.com/120x120/?woman,smile" class="mx-auto mt-3">
+          <div class="card-body">
+            <h5>Ms. Sunita</h5>
+            <p>Member</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer include -->
+  <div ng-include="'../includes/footer.html'"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

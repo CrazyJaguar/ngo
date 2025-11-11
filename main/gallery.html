@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="galleryApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - WCWS</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Animate.css -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #f9f9f9, #eaf2f8);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    h2, h3 {
+      color: #0d6efd;
+      font-weight: 600;
+    }
+
+    .event-section {
+      margin-bottom: 60px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      padding: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .event-section:hover {
+      transform: translateY(-5px);
+    }
+
+    .gallery-img {
+      border-radius: 12px;
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    .see-all-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 8px 18px;
+      border-radius: 50px;
+      background-color: #0d6efd;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .see-all-btn:hover {
+      background-color: #0b5ed7;
+      transform: scale(1.05);
+    }
+
+    .section-heading {
+      border-bottom: 3px solid #0d6efd;
+      display: inline-block;
+      padding-bottom: 5px;
+      margin-bottom: 25px;
+    }
+  </style>
+</head>
+<body ng-controller="GalleryController">
+
+  <!-- Navbar -->
+  <div ng-include="'../includes/navbar.html'"></div>
+
+  <!-- Gallery Section -->
+  <div class="container py-5">
+    <h2 class="text-center mb-5 animate__animated animate__fadeInDown">Our Gallery</h2>
+
+    <!-- Loop through events -->
+    <div class="event-section animate__animated animate__fadeInUp" ng-repeat="event in events">
+      <h3 class="section-heading">{{ event.name }}</h3>
+      <div class="row g-3">
+        <div class="col-md-4" ng-repeat="img in event.images">
+          <img ng-src="{{ img }}" alt="Gallery Image" class="gallery-img">
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="all-pictures.html#{{ event.id }}" class="see-all-btn">See All Pictures</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div ng-include="'../includes/footer.html'"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- AngularJS App -->
+  <script>
+    var app = angular.module('galleryApp', []);
+
+    app.controller('GalleryController', function($scope) {
+      $scope.events = [
+        {
+          id: 'empowerment',
+          name: 'Women Empowerment Program 2024',
+          images: [
+            '../pictures/gallery/a1.jpg',
+            '../pictures/gallery/a2.jpg',
+            '../pictures/gallery/a3.jpg',
+            '../pictures/gallery/a4.jpg',
+            '../pictures/gallery/a5.jpg'
+          ]
+        },
+        {
+          id: 'child-education',
+          name: 'Child Education Awareness Campaign',
+          images: [
+            '../pictures/gallery/b1.jpg',
+            '../pictures/gallery/b2.jpg',
+            '../pictures/gallery/b3.jpg',
+            '../pictures/gallery/b4.jpg'
+          ]
+        },
+        {
+          id: 'health-camp',
+          name: 'Free Health Camp for Women & Children',
+          images: [
+            '../pictures/gallery/c1.jpg',
+            '../pictures/gallery/c2.jpg',
+            '../pictures/gallery/c3.jpg',
+            '../pictures/gallery/c4.jpg'
+          ]
+        },
+        {
+          id: 'training',
+          name: 'Skill Development & Training Workshop',
+          images: [
+            '../pictures/gallery/d1.jpg',
+            '../pictures/gallery/d2.jpg',
+            '../pictures/gallery/d3.jpg',
+            '../pictures/gallery/d4.jpg'
+          ]
+        }
+      ];
+    });
+  </script>
+
+</body>
+</html>

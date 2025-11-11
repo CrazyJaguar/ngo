@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ngoApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women and Children Welfare Society - Home</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      background: url('../pictures/unnamed.jpg') center/cover no-repeat;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+      z-index: 0;
+    }
+
+    .hero h1 {
+      position: relative;
+      font-size: 3rem;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+      z-index: 1;
+    }
+
+    .hero h1:hover {
+      transform: scale(1.05);
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.8);
+    }
+
+    .lang-switch {
+  position: relative;
+  display: inline-block;
+  width: 65px;
+  height: 28px;
+}
+
+.lang-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #6c757d;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #0d6efd;
+}
+
+input:checked + .slider::before {
+  transform: translateX(36px);
+}
+
+.lang-label {
+  position: absolute;
+  right: -42px;
+  top: 2px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+    footer {
+      background: #222;
+      color: #ddd;
+      padding: 40px 0;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+
+  </style>
+</head>
+
+<body ng-controller="BlogCtrl">
+  <!-- Navbar -->
+  <div ng-include="'../includes/navbar.html'"></div>
+
+  <!-- Hero Section -->
+  <section class="hero text-center">
+    <h1>Empowering Women, Uplifting Children</h1>
+  </section>
+
+  <!-- Blog Section -->
+  <div class="row">
+    <div class="col-md-4 mb-3" ng-repeat="post in posts">
+      <div class="card h-100">
+        <img ng-src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text">{{ post.preview }}</p>
+          <a ng-href="blog-details.html?file={{ post.file }}&title={{ post.title }}" target="" class="btn btn-primary">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Read All Blogs Button -->
+    <div class="text-center mt-4">
+      <a href="blogs.html" class="btn btn-outline-primary btn-lg">
+        Read All Blogs
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div ng-include="'../includes/footer.html'"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- AngularJS Controller -->
+  <script>
+    angular.module('ngoApp', [])
+    .controller('BlogCtrl', function($scope, $http) {
+      $scope.posts = [
+        { title: "Education for All", image: "../pictures/women1.png", file: "../blogs/education.txt" },
+        { title: "Women Empowerment Workshop", image: "../pictures/women2.jpg", file: "../blogs/women.txt" },
+        { title: "Health Camp Success", image: "../pictures/women3.jpg", file: "../blogs/health.txt" }
+      ];
+
+      $scope.posts.forEach(post => {
+        $http.get(post.file).then(function(response) {
+          let text = response.data.replace(/\n/g, " ");
+          post.preview = text.split(" ").slice(0, 20).join(" ") + "...";
+        }, function() {
+          post.preview = "Unable to load preview.";
+        });
+      });
+    });
+  </script>
+
+ <script>
+  // Initialize Google Translate
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,ne',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+
+  // Load Google Translate script
+  var gTranslate = document.createElement('script');
+  gTranslate.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+  document.body.appendChild(gTranslate);
+
+  // Function to trigger translation
+  function triggerTranslation(lang) {
+    const frame = document.querySelector('.goog-te-menu-frame');
+    if (!frame) return false;
+
+    const innerDoc = frame.contentDocument || frame.contentWindow.document;
+    const items = innerDoc.querySelectorAll('.goog-te-menu2-item span.text');
+    for (const item of items) {
+      if (item.innerText.trim().toLowerCase() === lang.toLowerCase()) {
+        item.click();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Wait for Google Translate to load
+  function waitForTranslate(callback) {
+    const check = setInterval(() => {
+      const frame = document.querySelector('.goog-te-menu-frame');
+      if (frame) {
+        clearInterval(check);
+        callback();
+      }
+    }, 1000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('langToggle');
+    const label = document.getElementById('langLabel');
+
+    waitForTranslate(() => {
+      toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          triggerTranslation('Nepali');
+          label.textContent = 'NEP';
+        } else {
+          triggerTranslation('English');
+          label.textContent = 'EN';
+        }
+      });
+    });
+  });
+</script>
+<script>
+  // Initialize Google Translate
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,ne',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+
+  // Load Google Translate script
+  var gTranslate = document.createElement('script');
+  gTranslate.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+  document.body.appendChild(gTranslate);
+
+  // Function to trigger translation
+  function triggerTranslation(lang) {
+    const frame = document.querySelector('.goog-te-menu-frame');
+    if (!frame) return false;
+
+    const innerDoc = frame.contentDocument || frame.contentWindow.document;
+    const items = innerDoc.querySelectorAll('.goog-te-menu2-item span.text');
+    for (const item of items) {
+      if (item.innerText.trim().toLowerCase() === lang.toLowerCase()) {
+        item.click();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Wait for Google Translate to load
+  function waitForTranslate(callback) {
+    const check = setInterval(() => {
+      const frame = document.querySelector('.goog-te-menu-frame');
+      if (frame) {
+        clearInterval(check);
+        callback();
+      }
+    }, 1000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('langToggle');
+    const label = document.getElementById('langLabel');
+
+    waitForTranslate(() => {
+      toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          triggerTranslation('Nepali');
+          label.textContent = 'NEP';
+        } else {
+          triggerTranslation('English');
+          label.textContent = 'EN';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
